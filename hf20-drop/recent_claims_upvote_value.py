@@ -31,8 +31,6 @@ def get_sbd_per_rshares(reward_balance, recent_claims, date, not_broadcasted_vot
     fund_per_share = reward_balance / (recent_claims)
     steem_price = requests.get(
         date.strftime('https://api.coingecko.com/api/v3/coins/steem/history?date=%d-%m-%Y')).json()
-    global coingecko_count
-    coingecko_count += 1
     median_price = get_median_price(steem_price['market_data']['current_price']['usd'])
     SBD_price = (median_price * Amount(1, "STEEM")).amount
     return (fund_per_share * SBD_price, steem_price['market_data']['current_price']['usd'])
@@ -42,7 +40,6 @@ funds = requests.get('https://steemdb.com/api/funds')
 funds = funds.json()
 stm = Steem()
 set_shared_steem_instance(stm)
-coingecko_count = 0
 
 for e in funds:
     e['last_update'] = parse(e['last_update'])
