@@ -10,8 +10,8 @@ for e in funds:
 
 funds = sorted(funds, key=lambda x: x['last_update'])
 now = datetime.datetime.now()
-for cnt, i in enumerate([7, 14]):
-    start = now - datetime.timedelta(days=7)
+for cnt, i in enumerate([150, 450]):
+    start = now - datetime.timedelta(days=i)
     date = []
     balance = []
     recent_claims = []
@@ -23,7 +23,7 @@ for cnt, i in enumerate([7, 14]):
         recent_claims.append(e['recent_claims'])
     plt.subplot(2, 1, cnt+1)
     plt.plot(date, balance, color='r')
-    plt.title('Recent Claims and Reward Balance - Last 450 days')
+    plt.title(f'Recent Claims and Reward Balance - Last {i} days')
     plt.xlabel('Date')
     plt.ylabel('Reward Balance', color='r')
     plt.yticks(color='r')
